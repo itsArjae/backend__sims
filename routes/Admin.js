@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router();
-const admin = require('../controller/admin/admin.controller');
+const adminController = require('../controller/admin/admin.controller');
 
-router.post('/create',admin.saveAdmin);
-router.post('/login',admin.adminLogin);
+router.post('/create',adminController.saveAdmin);
+router.post('/login',adminController.adminLogin);
+router.get('/fetch/id/:id',adminController.getAdminInfo);
+
 module.exports = router;
 
 

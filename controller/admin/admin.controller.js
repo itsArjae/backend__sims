@@ -51,4 +51,16 @@ const getAdmin = async (req, res, next) => {
   res.json(admin);
 };
 
-module.exports = { saveAdmin, getAdmin,adminLogin };
+const getAdminInfo = async (req,res,next) => {
+  const id = req.params.id;
+  const adminData = await Admin.findOne({
+    where:{
+      id:id
+    }
+  })
+
+  res.json(adminData);
+
+}
+
+module.exports = { saveAdmin, getAdmin, adminLogin, getAdminInfo };
