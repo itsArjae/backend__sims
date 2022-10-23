@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const scholarsController = require('../controller/scholars/scholars.controller');
+router.post('/create',scholarsController.saveScholars);
+router.get('/fetch/batch/:id/:bid',scholarsController.getScholarsBatch);
+router.get('/fetch/all',scholarsController.getAllScholars);
+router.get('/fetch/:id',scholarsController.getScholarsInfo);
+router.get('/fetch/record/:id',scholarsController.getScholarRecord);
+router.get('/fetch/stats/:id',scholarsController.getStatistics);
+//router.post('/update',);
+module.exports = router;

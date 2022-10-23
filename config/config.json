@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "arjae2000",
+    "database": "sims",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "sims_bn65_user",
+    "password": "2Ds5YUnChCfmYgopo7l0kNNtvyYYvlPs",
+    "database": "sims_bn65",
+    "host": "dpg-cd37pbo2i3mvvgcgk730-a",
+    "dialect": "postgres"
+  }
+}
