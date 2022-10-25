@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "sims_bn65_user",
-    "password": "2Ds5YUnChCfmYgopo7l0kNNtvyYYvlPs",
-    "database": "sims_bn65",
-    "host": "dpg-cd37pbo2i3mvvgcgk730-a",
+    "username": "simsbulsu_database_user",
+    "password": "XtWK9kmAkm7Q5W80f4c5EoAdN2pqmxcc",
+    "database": "simsbulsu_database",
+    "host": "dpg-cdbvio9gp3jvds07u8c0-a",
     "dialect": "postgres"
   }
 }
