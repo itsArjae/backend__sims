@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const scholarshipController = require("../controller/scholarship/scholarship.controller");
-const { Scholarship } = require("../models");
+const { Scholarship, Scholarsrecords } = require("../models");
 
 router.post("/create", scholarshipController.saveScholarship);
 router.get("/fetch", scholarshipController.getScholarship);
@@ -40,6 +40,16 @@ router.post("/update/:id", async (req, res, next) => {
   });
 
   res.json(updateRows);
+});
+
+router.post('/delete/:id',async(req,res,next)=>{
+  const id = req.params.id;
+
+  const count = await Scholarship.destroy({where:{id:id}})
+  const temp = await Scholarsrecords.destroy({
+    where:{ScholarshipId:id}
+  })
+  res.json(count);
 });
 
 module.exports = router;
