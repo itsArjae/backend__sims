@@ -240,4 +240,5 @@ const getStatistics = async(req,res,next) => {
   res.json([{name:"CITE",value:cite.length},{name:"CIT",value:cit.length},{name:"COED",value:coed.length},{name:"CBA",value:cba.length}]);
 }
 
+
 module.exports = { saveScholars, getScholarsBatch,getAllScholars,getScholarsInfo,getScholarRecord,getStatistics };

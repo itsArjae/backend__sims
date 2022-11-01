@@ -22,6 +22,52 @@ router.get("/count", async (req, res, next) => {
     res.json({size:size});
     
   });
+
+  router.get("/count/dep", async (req, res, next) => {
+  
+    const cite = "CITE";
+    const cit = "CIT";
+    const cba = "CBA";
+    const coed = "COED";
+    const year = new Date();
+    const depcite = await Scholarsrecords.findAll(
+        {
+            where:{
+                   department:cite,
+                   year:year.getFullYear()
+                  }
+        }
+    );
+
+    const depcit = await Scholarsrecords.findAll(
+      {
+          where:{
+                 department:cit,
+                 year:year.getFullYear()
+                }
+      }
+  );
+
+    const depcba = await Scholarsrecords.findAll(
+    {
+        where:{
+               department:cba,
+               year:year.getFullYear()
+              }
+    }
+);
+
+    const depcoed = await Scholarsrecords.findAll(
+  {
+      where:{
+             department:coed,
+             year:year.getFullYear()
+      }
+  }
+);
+    res.json([{name:"CITE",value:depcite.length},{name:"CIT",value:depcit.length},{name:"COED",value:depcoed.length},{name:"CBA",value:depcba.length}]);
+    
+  });
 //router.post('/update',);
 
 
