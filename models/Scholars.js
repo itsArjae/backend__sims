@@ -73,6 +73,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    updated: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    year: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 
 

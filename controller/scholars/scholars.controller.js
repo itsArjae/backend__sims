@@ -78,6 +78,10 @@ const saveScholars = async (req, res, next) => {
     },
   });
 
+  const curScholar = await Scholars.findOne({
+    where:{studentno:studentno}
+  })
+
   const scholarDataToSave = {
     year: batchyear,
     studentno: studentno,
@@ -85,12 +89,12 @@ const saveScholars = async (req, res, next) => {
     scholarshipabbrev: abbreviation,
     ScholarshipId: ScholarshipId,
     BatchId: batchid,
-    surname: surname,
-    firstname: firstname,
-    middlename: middlename,
-    course: course,
-    department: department,
-    course: course,
+    surname: curScholar.surname,
+    firstname: curScholar.firstname,
+    middlename: curScholar.middlename,
+    course: curScholar.course,
+    department: curScholar.department,
+    
   };
 
   const dt = new Date();
@@ -109,7 +113,9 @@ const saveScholars = async (req, res, next) => {
           where:{studentno:studentno,year:dt.getFullYear()}
         })
         const update = await Scholars.update({
-          count:count
+          count:count,
+          updated:dt.getFullYear(),
+          year:batchyear
         },
         {
           where:{studentno:studentno}
@@ -131,7 +137,9 @@ const saveScholars = async (req, res, next) => {
           where:{studentno:studentno,year:dt.getFullYear()}
         })
         const update = await Scholars.update({
-          count:count
+          count:count,
+          updated:dt.getFullYear(),
+          year:batchyear
         },
         {
           where:{studentno:studentno}
@@ -157,7 +165,9 @@ const saveScholars = async (req, res, next) => {
           where:{studentno:studentno,year:dt.getFullYear()}
         })
         const update = await Scholars.update({
-          count:count
+          count:count,
+          updated:dt.getFullYear(),
+          year:batchyear
         },
         {
           where:{studentno:studentno}
@@ -180,7 +190,9 @@ const saveScholars = async (req, res, next) => {
 
       
         const update = await Scholars.update({
-          count:count
+          count:count,
+          updated:dt.getFullYear(),
+          year:batchyear
         },
         {
           where:{studentno:studentno}

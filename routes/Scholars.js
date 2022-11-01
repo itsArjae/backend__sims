@@ -162,5 +162,16 @@ router.post("/update/:id", async (req, res, next) => {
   
     res.json(updateRows);
   });
+  
+  router.get('/count/list/:id',async (req,res,next)=>{
+    const id = req.params.id;
+    const data = await Scholarsrecords.count({where:{studentno:id}});
+   res.json(data)
+  
+  });
 
+  router.get('/fullrecord',async(req,res,next)=>{
+    const data = await Scholarsrecords.findAll();
+    res.json(data);
+  })
 module.exports = router;

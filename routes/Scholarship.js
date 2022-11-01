@@ -8,6 +8,9 @@ router.get("/fetch", scholarshipController.getScholarship);
 
 router.get("/fetch/id/:id", scholarshipController.getScholarshipInfo);
 
+router.get('/fetch/list/:id',scholarshipController.getScholarshipList);
+
+
 router.get("/fetch/count", async (req, res, next) => {
   const size = await Scholarship.count();
   res.json(size);

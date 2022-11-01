@@ -1,5 +1,5 @@
 const express = require("express");
-const { Scholarship } = require("../../models");
+const { Scholarship,Scholarsrecords } = require("../../models");
 
 const saveScholarship = async (req, res, next) => {
   const scholarship = req.body;
@@ -18,4 +18,14 @@ const getScholarshipInfo = async (req, res, next) => {
   res.json(scholarship);
 };
 
-module.exports = { saveScholarship, getScholarship, getScholarshipInfo };
+const getScholarshipList = async(req,res,next) => {
+  const id = req.params.id;
+
+  const data = await Scholarsrecords.findAll({
+    where:{studentno:id}
+  });
+
+  res.json(data);
+}
+
+module.exports = { saveScholarship, getScholarship, getScholarshipInfo,getScholarshipList };
