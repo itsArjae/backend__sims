@@ -69,6 +69,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    count: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 
 

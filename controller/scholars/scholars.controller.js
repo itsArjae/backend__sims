@@ -1,5 +1,4 @@
 const express = require("express");
-
 const {
   Scholarship,
   Scholarshiprecords,
@@ -94,12 +93,7 @@ const saveScholars = async (req, res, next) => {
     course: course,
   };
 
-  // if (scholarRecords.length > 0) {
-  //   return res.json({
-  //     message: "This scholar already exist",
-  //     err: 400,
-  //   });
-  // }
+  const dt = new Date();
 
   if (foundScholar.length == 0) {
     await Scholars.create(scholarsData);
@@ -111,6 +105,16 @@ const saveScholars = async (req, res, next) => {
         });
       } else {
         await Scholarsrecords.create(scholarDataToSave);
+         const count = await Scholarsrecords.count({
+          where:{studentno:studentno,year:dt.getFullYear()}
+        })
+        const update = await Scholars.update({
+          count:count
+        },
+        {
+          where:{studentno:studentno}
+        }
+        );
         return res.json({ message: "Scholars Save Successfully" });
       }
     } else {
@@ -122,7 +126,17 @@ const saveScholars = async (req, res, next) => {
         });
       }
       else{
-        await Scholarsrecords.create(scholarDataToSave);
+        await Scholarsrecords.create(scholarDataToSave); 
+        const count = await Scholarsrecords.count({
+          where:{studentno:studentno,year:dt.getFullYear()}
+        })
+        const update = await Scholars.update({
+          count:count
+        },
+        {
+          where:{studentno:studentno}
+        }
+        );
         return res.json({ message: "Scholars Save Successfully" });
       }
 
@@ -139,6 +153,16 @@ const saveScholars = async (req, res, next) => {
         });
       } else {
         await Scholarsrecords.create(scholarDataToSave);
+        const count = await Scholarsrecords.count({
+          where:{studentno:studentno,year:dt.getFullYear()}
+        })
+        const update = await Scholars.update({
+          count:count
+        },
+        {
+          where:{studentno:studentno}
+        }
+        );
         return res.json({ message: "Scholars Save Successfully" });
       }
     } else {
@@ -150,6 +174,18 @@ const saveScholars = async (req, res, next) => {
       }
       else{
         await Scholarsrecords.create(scholarDataToSave);
+        const count = await Scholarsrecords.count({
+          where:{studentno:studentno,year:dt.getFullYear()}
+        });
+
+      
+        const update = await Scholars.update({
+          count:count
+        },
+        {
+          where:{studentno:studentno}
+        }
+        );
         return res.json({ message: "Scholars Save Successfully" });
       }
     }
@@ -240,4 +276,6 @@ const getStatistics = async(req,res,next) => {
   res.json([{name:"CITE",value:cite.length},{name:"CIT",value:cit.length},{name:"COED",value:coed.length},{name:"CBA",value:cba.length}]);
 }
 
-module.exports = { saveScholars, getScholarsBatch,getAllScholars,getScholarsInfo,getScholarRecord,getStatistics };
+
+
+module.exports = { saveScholars, getScholarsBatch,getAllScholars,getScholarsInfo,getScholarRecord,getStatistics};

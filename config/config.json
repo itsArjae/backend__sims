@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "simsbulsu",
+    "password": "arjae2000",
     "database": "sims",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "simsbulsu_database_user",
-    "password": "XtWK9kmAkm7Q5W80f4c5EoAdN2pqmxcc",
-    "database": "simsbulsu_database",
-    "host": "dpg-cdbvio9gp3jvds07u8c0-a",
-    "dialect": "postgres"
+    "username": "root",
+    "password": "",
+    "database": "",
+    "host": "",
+    "dialect": "mysql"
   }
 }
