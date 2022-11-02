@@ -162,16 +162,35 @@ router.post("/update/:id", async (req, res, next) => {
   
     res.json(updateRows);
   });
+
+
   
   router.get('/count/list/:id',async (req,res,next)=>{
     const id = req.params.id;
     const data = await Scholarsrecords.count({where:{studentno:id}});
    res.json(data)
-  
   });
 
-  router.get('/fullrecord',async(req,res,next)=>{
-    const data = await Scholarsrecords.findAll();
+  router.get('/fullscholarsrecord',async(req,res,next)=>{
+    const data = await Scholars.findAll();
     res.json(data);
   })
+  router.get('/fullrecord',async(req,res,next)=>{
+  
+  const dt = new Date();
+    const data = await Scholars.findAll();
+    // const records = await Scholarsrecords.findAll();
+    let newData = [];
+    for(var i=0; i<data.length; i++){
+      const size = await Scholarsrecords.count({
+        where:{studentno:data[i].studentno,year:dt.getFullYear()}
+      });
+      newData.push({id:data[i].id,studentno:data[i].studentno,surname: data[i].surname, firstname:data[i].firstname,middlename:data[i].middlename,course:data[i].course,department:data[i].department,count:size});
+    }
+
+
+    res.json(newData);
+  })
+
+
 module.exports = router;
