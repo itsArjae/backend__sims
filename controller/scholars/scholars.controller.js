@@ -62,6 +62,7 @@ const saveScholars = async (req, res, next) => {
   const { batchyear } = batchData;
   const { allowduplication, abbreviation } = scholarshipData;
 
+  
   const scholarRecords = await Scholarsrecords.findAll({
     where: {
       year: batchyear,
@@ -81,8 +82,24 @@ const saveScholars = async (req, res, next) => {
   const curScholar = await Scholars.findOne({
     where:{studentno:studentno}
   })
-
-  const scholarDataToSave = {
+  let scholarDataToSave = {};
+if(!curScholar){
+  scholarDataToSave = {
+    year: batchyear,
+    studentno: studentno,
+    yearlevel: yearlevel,
+    scholarshipabbrev: abbreviation,
+    ScholarshipId: ScholarshipId,
+    BatchId: batchid,
+    surname: surname,
+    firstname: firstname,
+    middlename: middlename,
+    course: course,
+    department: department,
+    
+  };
+}else{
+  scholarDataToSave = {
     year: batchyear,
     studentno: studentno,
     yearlevel: yearlevel,
@@ -96,6 +113,8 @@ const saveScholars = async (req, res, next) => {
     department: curScholar.department,
     
   };
+}
+ 
 
   const dt = new Date();
 
