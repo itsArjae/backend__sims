@@ -102,7 +102,8 @@ router.get('/distinct/year/id/:id',async(req,res,next)=>{
      for(var i=0; i<sorted.length; i++){
           const addData = await Scholarsrecords.count({
              where:{
-                 year:sorted[i]
+                 year:sorted[i],
+                 ScholarshipId:id
              }
           })
          countYear.push({year:uniqueChars[i],value:addData});
