@@ -191,7 +191,17 @@ router.post("/update/:id", async (req, res, next) => {
 
 
     res.json(newData);
-  })
+  });
+
+router.post('/delete/:id',async(req,res,next)=>{
+  const id = req.params.id;
+
+ const deletedRow = await Scholarsrecords.destroy({
+    where:{id:id}
+  });
+
+  res.json(deletedRow);
+})
 
 
 module.exports = router;
