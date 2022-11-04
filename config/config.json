@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "sql12538696",
-    "password": "J1YzKtXdGi",
-    "database": "sql12538696",
-    "host": "sql12.freemysqlhosting.net",
+    "username": "u731196314_sims2022",
+    "password": "Bulsu2022",
+    "database": "u731196314_sims",
+    "host": "sql621.main-hosting.eu",
     "dialect": "mysql"
   }
 }
