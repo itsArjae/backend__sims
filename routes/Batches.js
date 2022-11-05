@@ -17,5 +17,17 @@ router.get('/fetch/:id',async (req,res,next)=>{
   res.json(batches);
 });
 
+router.post('/edit/name/:id',async(req,res,next)=>{
+  const id = req.params.id;
+  const data = req.body;
+  const {batchName} = data;
 
+  const updatedRows = await Batches.update({
+    batchname: batchName
+  },{
+    where:{id:id}
+  });
+
+  res.json(updatedRows);
+})
 module.exports = router;
