@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "arjae2000",
+    "password": "simsbulsu",
     "database": "sims",
     "host": "127.0.0.1",
     "dialect": "mysql"
