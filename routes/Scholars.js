@@ -201,7 +201,8 @@ router.post('/delete/:id',async(req,res,next)=>{
   });
 
   res.json(deletedRow);
-})
+});
+
 
 
 module.exports = router;
