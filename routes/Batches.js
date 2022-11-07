@@ -30,4 +30,14 @@ router.post('/edit/name/:id',async(req,res,next)=>{
 
   res.json(updatedRows);
 })
+
+router.post('/delete/:id',async(req,res,next)=>{
+  const id = req.params.id;
+
+  const deletebatch = await Batches.destroy({
+    where: { id:id }
+  })
+  res.json(deletebatch);
+});
+
 module.exports = router;

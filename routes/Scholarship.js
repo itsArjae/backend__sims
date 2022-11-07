@@ -116,7 +116,7 @@ router.post('/delete/:id',async(req,res,next)=>{
 
   const count = await Scholarship.destroy({where:{id:id}})
   const temp = await Scholarsrecords.destroy({
-    where:{ScholarshipId:id}
+    where: { ScholarshipId:id }
   })
   res.json(count);
 });
