@@ -158,5 +158,8 @@ router.get("/students/count/:id/:year", async (req, res, next) => {
   res.json({count:count});
 });
 
+router.get('/check',async(req,res,next)=>{
+  res.json({message:"welcome"})
+})
 
 module.exports = router;
