@@ -137,6 +137,21 @@ router.get("/scholars/count/:id", async (req, res, next) => {
   res.json({count:count});
 });
 
+router.get("/students/count/:id/:year", async (req, res, next) => {
+  const id = req.params.id;
+  const year = req.params.year;
+
+
+  const count = await Scholarsrecords.count({
+    where:{
+        studentno:id,
+        year: year
+    }
+  });
+  
+
+  res.json({count:count});
+});
 
 
 module.exports = router;
