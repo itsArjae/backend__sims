@@ -16,6 +16,11 @@ router.get("/fetch/count", async (req, res, next) => {
   res.json(size);
 });
 
+router.get("/fetch/countall", async (req, res, next) => {
+  const size = await Scholarship.count();
+  res.json(size);
+});
+
 router.get("/count/cat", async (req, res, next) => {
   
   const year = new Date();
