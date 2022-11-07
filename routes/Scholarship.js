@@ -121,4 +121,22 @@ router.post('/delete/:id',async(req,res,next)=>{
   res.json(count);
 });
 
+router.get("/scholars/count/:id", async (req, res, next) => {
+  const id = req.params.id;
+  
+  const year = new Date();
+
+  const count = await Scholarsrecords.count({
+    where:{
+        ScholarshipId:id,
+        year: year.getFullYear()
+    }
+  });
+  
+
+  res.json({count:count});
+});
+
+
+
 module.exports = router;
