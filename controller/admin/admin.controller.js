@@ -46,6 +46,7 @@ const adminLogin = async (req, res, next) => {
 
 };
 
+
 const getAdmin = async (req, res, next) => {
   const admin = await Admin.findAll();
   res.json(admin);
