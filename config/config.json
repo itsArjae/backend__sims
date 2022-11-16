@@ -1,16 +1,9 @@
 {
   "development": {
-<<<<<<< HEAD
     "username": "root",
     "password": "simsbulsu",
     "database": "sims",
     "host": "127.0.0.1",
-=======
-    "username": "u731196314_sims2022",
-    "password": "Bulsu2022",
-    "database": "u731196314_sims",
-    "host": "sql621.main-hosting.eu",
->>>>>>> 79f8220c0fae3d91715c65e7972286532f090574
     "dialect": "mysql"
   
   },
