@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const scholarshipController = require("../controller/scholarship/scholarship.controller");
-const { Scholarship, Scholarsrecords } = require("../models");
+const { Scholarship, Scholarsrecords, Scholarshiprecord } = require("../models");
 
 router.post("/create", scholarshipController.saveScholarship);
 router.get("/fetch", scholarshipController.getScholarship);
@@ -14,6 +14,21 @@ router.get('/fetch/list/:id',scholarshipController.getScholarshipList);
 router.get("/fetch/count", async (req, res, next) => {
   const size = await Scholarship.count();
   res.json(size);
+});
+
+router.get("/scholars/fetch/:studentno", async (req, res, next) => {
+  const studentno = req.params.studentno;
+  const year = new Date();
+
+  const find = await Scholarsrecords.findAll({
+    where:{
+        studentno:studentno,
+        year: year.getFullYear()
+    }
+  });
+  
+
+  res.json(find);
 });
 
 router.get("/fetch/countall", async (req, res, next) => {

@@ -203,6 +203,25 @@ router.post('/delete/:id',async(req,res,next)=>{
   res.json(deletedRow);
 });
 
+router.post('/delete/scholars/:studentno/:id',async(req,res,next)=>{
+  const id = req.params.id;
+  const studentno = req.params.studentno;
 
+  const deleteID = await Scholars.destroy({
+    where:{studentno:studentno}
+  });
+
+  const deletedRecord = await Scholarsrecords.destroy({
+    where:{studentno:studentno}
+  });
+  
+  res.json({message:"success"});
+});
+
+router.get('/get/filterlist',async(req,res,next)=>{
+   const data = await Scholarsrecords.findAll();
+
+  res.json(data);
+})
 
 module.exports = router;
