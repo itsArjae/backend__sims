@@ -45,7 +45,7 @@ const adminLogin = async (req, res, next) => {
   const result = bcryptjs.compareSync(password, tempPassword); 
 
   if(!result){
-    res.json({error:"Wrong Password1"});
+    res.json({error:"Wrong Password"});
     return;
   }
 
