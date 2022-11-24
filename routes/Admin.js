@@ -74,6 +74,34 @@ router.post("/update", async (req, res, next) => {
 
     await Admin.create(newData);
     res.json(data);
+  });
+
+  router.post("/changepass",async(req,res,next)=>{
+    const data = req.body;
+    const {email,password} = data;
+    const foundUser = await Admin.findOne({
+      where:{email:email}
+    })
+
+    const newPassword = bcryptjs.hashSync(password, 10);
+    if(!foundUser){
+      res.json({error:"Email doesn't exist"})
+      return;
+    }
+
+    const updateRow = await Admin.update({
+      password:newPassword
+    },
+    {
+      where:{email:email}
+    })
+
+
+
+
+
+    res.json(updateRow);
+    // res.json({message:"hello"})
   })
 
 module.exports = router;
