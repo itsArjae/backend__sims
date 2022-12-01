@@ -222,6 +222,17 @@ router.get('/get/filterlist',async(req,res,next)=>{
    const data = await Scholarsrecords.findAll();
 
   res.json(data);
+});
+
+router.get('/studentno/fetch/:id', async(req,res,next)=>{
+  const id = req.params.id;
+
+  const data = await Scholars.findOne({
+    where:{studentno:id}
+  })
+
+  res.json(data);
 })
+
 
 module.exports = router;

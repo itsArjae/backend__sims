@@ -8,6 +8,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    slot: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+   
   });
 
 

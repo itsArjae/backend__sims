@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const {Batches} = require('../models');
+const {Batches,Scholarsrecords} = require('../models');
 
 router.post('/create',async (req,res,next)=>{
     const batch = req.body;
@@ -39,5 +39,17 @@ router.post('/delete/:id',async(req,res,next)=>{
   })
   res.json(deletebatch);
 });
+
+router.get('/batches/size/:id',async(req,res,next)=>{
+  const id = req.params.id;
+
+  const size = await Scholarsrecords.count({
+    where:{
+      BatchId:id
+    }
+  });
+
+  res.json({size:size})
+})
 
 module.exports = router;
