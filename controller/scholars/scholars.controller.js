@@ -307,11 +307,60 @@ const getStatistics = async(req,res,next) => {
   res.json([{name:"CITE",value:cite.length},{name:"CIT",value:cit.length},{name:"COED",value:coed.length},{name:"CBA",value:cba.length}]);
 }
 
-const ScholarReports = async(req,res,next)=>{
+  const createScholars = async(req,res,next) => {
+    const data = req.body;
+    const {studentno,ScholarshipId,BatchId,year} = req.body;
+
+    const foundUser = await Scholarsrecords.findOne({
+      where:{
+        studentno:studentno,
+        ScholarshipId:ScholarshipId,
+        BatchId:BatchId
+      }
+    })
+
+ 
+   
+    if(foundUser){
+      res.json({error:"Scholars Already Exist"})
+      return;
+    }
+
+    const scholarship = await Scholarship.findByPk(ScholarshipId);
+    const newData = {...data,scholarshipabbrev:scholarship.abbreviation};
     
-}
+    
+ 
+    
+    if(scholarship.allowduplication == false){
+        const findUser = await Scholarsrecords.findAll({
+          where:{
+            studentno:studentno,
+            year:year
+          }
+        })
+
+        if(findUser.length > 0){
+          res.json({error:"Scholar Exist in other Scholarship"})
+          return;
+        }
+
+        await Scholarsrecords.create(newData);
+        res.json(newData);
+        return
+        
+    }
+    else{
+      await Scholarsrecords.create(newData);
+        res.json(newData);
+        return
+    }
+
+    res.json(data);
+  }
 
 
 
 
-module.exports = { saveScholars, getScholarsBatch,getAllScholars,getScholarsInfo,getScholarRecord,getStatistics};
+
+module.exports = { saveScholars, getScholarsBatch,getAllScholars,getScholarsInfo,getScholarRecord,getStatistics,createScholars};

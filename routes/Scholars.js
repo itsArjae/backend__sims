@@ -10,6 +10,8 @@ router.get('/fetch/all',scholarsController.getAllScholars);
 router.get('/fetch/:id',scholarsController.getScholarsInfo);
 router.get('/fetch/record/:id',scholarsController.getScholarRecord);
 router.get('/fetch/stats/:id',scholarsController.getStatistics);
+router.post('/create/scholars',scholarsController.createScholars);
+
 
 router.get("/count", async (req, res, next) => {
   
