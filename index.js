@@ -14,6 +14,8 @@ const batchRouter = require('./routes/Batches');
 app.use('/batches',batchRouter);
 const scholarsRouter = require('./routes/Scholars');
 app.use('/scholars',scholarsRouter);
+const announcementsRouter = require('./routes/Announcements');
+app.use('/announcements',announcementsRouter);
 
 db.sequelize.sync().then(()=>{
   app.listen(process.env.PORT || 3001 , ()=> {
