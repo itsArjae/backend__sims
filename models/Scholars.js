@@ -83,6 +83,12 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Scholars.associate = (models) => {
+    Scholars.hasMany(models.Users, {
+      onDelete: "Cascade",
+    });
+    
+  };
 
   return Scholars;
 };
