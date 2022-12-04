@@ -65,15 +65,4 @@ const userLogin = async(req,res,next)=>{
 
 }
 
-const getUsersInfo = async (req,res,next) => {
-  const id = req.params.id;
-  const usersData = await Users.findAll({
-    where:{
-      id:id
-    }
-  })
-
-  res.json(usersData);
-}
-
-module.exports = {userRegister,userLogin,getUsersInfo};
+module.exports = {userRegister,userLogin};
