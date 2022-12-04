@@ -60,7 +60,7 @@ const userLogin = async(req,res,next)=>{
     return;
   }
 
-  res.json(data);
+  res.json({uid:foundEmail.id});
 
 
 }
