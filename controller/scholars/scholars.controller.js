@@ -5,7 +5,9 @@ const {
   Scholars,
   Scholarsrecords,
   Batches,
+  Users
 } = require("../../models");
+const bcryptjs = require('bcryptjs')
 
 const saveScholars = async (req, res, next) => {
   const add = req.body;
@@ -120,6 +122,13 @@ if(!curScholar){
 
   if (foundScholar.length == 0) {
     await Scholars.create(scholarsData);
+    const newPassword = bcryptjs.hashSync(studentno.toString(), 10);
+    await Users.create({
+      email:email,
+      password:newPassword,
+      studentno:studentno
+
+    });
     if (!allowduplication) {
       if (scholarRecords.length > 0) {
         return res.json({
@@ -130,7 +139,7 @@ if(!curScholar){
         await Scholarsrecords.create(scholarDataToSave);
          const count = await Scholarsrecords.count({
           where:{studentno:studentno,year:dt.getFullYear()}
-        })
+        }) 
         const update = await Scholars.update({
           count:count,
           updated:dt.getFullYear(),
