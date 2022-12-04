@@ -41,10 +41,6 @@ router.post("/update", async (req, res, next) => {
       return;
   }
 
-
-
-    
-
     const updateAdmin = await Admin.update({
         password:newPassword
     }, {
