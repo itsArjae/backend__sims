@@ -1,5 +1,5 @@
 
-const {Scholars,Users} = require('../../models');
+const {Scholars,Users,Applications} = require('../../models');
 const bcryptjs = require('bcryptjs')
 
 const userRegister = async(req,res,next) =>{
@@ -59,10 +59,60 @@ const userLogin = async(req,res,next)=>{
     res.json({error:"Wrong password"});
     return;
   }
-
   res.json({uid:foundEmail.id});
-
-
 }
 
-module.exports = {userRegister,userLogin};
+// const fetchUserInfo = async(req,res,next) =>{
+//   const id = 
+// }
+ 
+
+const checkBatches = async(req,res,next) => {
+  const bid = req.params.bid;
+  const stn = req.params.stn;
+
+  const user = await Users.findOne({
+    where:{id:stn}
+  })
+
+  const found = await Applications.findOne({
+    where:{
+      BatchId:bid,
+      studentno:user.studentno
+    }
+  })
+  
+  if(!found){
+    res.json({status:"none"});
+    return;
+  }
+
+  if(found.status == "pending"){
+    res.json({status:"pending"});
+    return;
+  }
+
+  if(found.status == "rejected"){
+    res.json({status:"rejected"});
+    return;
+  }
+  
+  re.json({status:"accepted"});
+}
+
+const applyBatches = async(req,res,next) => {
+  const bid = req.params.bid;
+  const stn = req.params.stn;
+  const data = req.body;
+
+  const user = await Users.findOne({
+    where:{id:stn}
+  })
+
+  let save = {studentno:user.studentno,status:"pending",BatchId:bid};
+
+
+   await Applications.create(save);
+  res.json(save);
+}
+module.exports = {userRegister,userLogin,checkBatches,applyBatches};
