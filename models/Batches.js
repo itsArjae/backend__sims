@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
    
   });
 
+  
+  Batches.associate = (models) => {
+    Batches.hasMany(models.Applications, {
+      onDelete: "Cascade",
+    });
+  
+  };
+
 
   return Batches;
 };
