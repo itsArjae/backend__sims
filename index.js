@@ -16,6 +16,8 @@ const scholarsRouter = require('./routes/Scholars');
 app.use('/scholars',scholarsRouter);
 const announcementsRouter = require('./routes/Announcements');
 app.use('/announcements',announcementsRouter);
+const userRouter = require('./routes/User');
+app.use('/users',userRouter);
 
 db.sequelize.sync().then(()=>{
   app.listen(process.env.PORT || 3001 , ()=> {
