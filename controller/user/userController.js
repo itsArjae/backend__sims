@@ -155,4 +155,34 @@ const batch = await Batches.findByPk(bid);
 
 }
 
-module.exports = {userRegister,userLogin,checkBatches,applyBatches,approval};
+const forgotPass = async(req,res,next) => {
+  const data = req.body;
+ 
+  const {password,userEmail} = data;
+
+  const foundUser = await Users.findOne({
+    where:{email:userEmail}
+  })
+
+  if(!foundUser){
+    res.json({error:"Email doesn't Exists!"});
+    return;
+  }
+
+  const newPassword = bcryptjs.hashSync(password, 10);
+
+  const updateRow = await Users.update({
+    password:newPassword
+  },{
+    where:{
+      email:userEmail
+    }
+  })
+
+  
+
+res.json(updateRow)
+
+}
+
+module.exports = {userRegister,userLogin,checkBatches,applyBatches,approval,forgotPass};

@@ -7,6 +7,7 @@ router.post('/login',userController.userLogin);
 router.get('/checkbatches/:bid/:stn',userController.checkBatches);
 router.post('/applybatches/:bid/:stn',userController.applyBatches);
 router.post('/approval/:bid/:stn',userController.approval);
+router.post('/forgotpass/user',userController.forgotPass);
 
 
 router.get('/fetch/:id',async (req,res,next)=>{
