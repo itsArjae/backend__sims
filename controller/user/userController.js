@@ -1,5 +1,5 @@
 
-const {Scholars,Users,Applications} = require('../../models');
+const {Scholars,Users,Applications,Scholarsrecords,Batches,Scholarship} = require('../../models');
 const bcryptjs = require('bcryptjs')
 
 const userRegister = async(req,res,next) =>{
@@ -97,7 +97,7 @@ const checkBatches = async(req,res,next) => {
     return;
   }
   
-  re.json({status:"accepted"});
+  res.json({status:"accepted"});
 }
 
 const applyBatches = async(req,res,next) => {
@@ -115,4 +115,44 @@ const applyBatches = async(req,res,next) => {
    await Applications.create(save);
   res.json(save);
 }
-module.exports = {userRegister,userLogin,checkBatches,applyBatches};
+
+
+const approval = async(req,res,next) => {
+  const stn = req.params.stn;
+  const bid = req.params.bid;
+  const data = req.body;
+  const user = await Scholars.findOne({
+    where:{studentno:stn}
+   });
+  const {action,schoId} = data;
+
+ const update = await Applications.update({
+  status:action
+ },
+ {
+  where:{
+    studentno:stn,
+    BatchId:bid
+  }
+ });
+
+ if(action == "rejected"){
+  res.json({message:"rejected",email:user.email,surname:user.surname})
+  return;
+ }
+
+
+
+const batch = await Batches.findByPk(bid);
+ const scho = await Scholarship.findByPk(schoId);
+
+
+ const newData ={year:batch.batchyear,studentno:stn,yearlevel:user.yearlevel,scholarshipabbrev:scho.abbreviation,surname:user.surname,firstname:user.firstname,middlename:user.middlename,course:user.course,department:user.department,BatchId:bid,ScholarshipId:schoId,course:user.course};
+
+  await Scholarsrecords.create(newData);
+
+ res.json({email:user.email,surname:user.surname})
+
+}
+
+module.exports = {userRegister,userLogin,checkBatches,applyBatches,approval};
